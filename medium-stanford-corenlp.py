@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 ######################################################
 # ESTE PEDAZO CONTROLA LA SALIDA UTF-8 Y LA AYUDA
@@ -11,8 +11,6 @@ args = parser.parse_args()
 import codecs,locale,sys
 if args.utf8:
     sys.stdout = codecs.getwriter("utf8")(sys.stdout)
-else:
-    sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 if args.json:
     outputFormat = "json"
 elif args.xml:
@@ -36,22 +34,21 @@ Podemos ejecutar este script desde la consola:
 """
 
 cadena = u"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir la Universidad Nacional!"
-cadena = cadena.encode("utf-8")
 
-# print u"Cadena:"
-# print "\t",cadena
+# print(u"Cadena:")
+# print("\t",cadena)
 from stanfordcorenlp import StanfordCoreNLP
 
 # Este comando inicia un servidor similar al que usamos probando la instalación y podemos usar "nlp" como
 # "cliente" para "anotar" texto en español
 # Acá debes reemplazar la ruta con la que corresponda en tu compu. Conviene adjudicarle la mitad de la memoria 
 # que tenga tu compu al programa ya que los procesos usan mucha memoria RAM (se recomiendan 8g])
-nlp = StanfordCoreNLP(r'/home/jaci/git/corenlp/', lang='es', memory='2g')
+nlp = StanfordCoreNLP(r'../corenlp/', lang='es', memory='2g')
 
 # # Podemos especificar las propiedades que queremos extraer y el formato de salida:
 # Podemos probar una salida en formato XML o JSON (más adelante veremos qué es eso)
 props={'annotators': 'tokenize,ssplit,pos,ner,parse','pipelineLanguage':'es','outputFormat':outputFormat}
-print nlp.annotate(cadena, properties=props)
+print(nlp.annotate(cadena, properties=props))
 
 """
 

@@ -35,7 +35,6 @@ El curso está acompañado por algunos artículos que puedes leer independientem
 1. [argumentosSimple.py](#6-argumentossimplepy)
 1. [argumentosParsed.py](#7-argumentosparsedpy)
 1. [limpiarTexto.py](#8-limpiartextopy)
-    1. test/
 1. [contarPalabras.py](#9-contarpalabraspy)
 1. [contarCaracteres.py](#10-contarcaracterespy)
 1. [basicNLTK.py](#11-basicnltkpy)

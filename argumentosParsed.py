@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -34,15 +34,12 @@ parser.add_argument("-M", "--may", help=u"Convertir a MAYÚSCULAS: Booleano, no 
 # Finalizamos el proceso de parceo, guardamos los argumentos en la variable "args"
 args = parser.parse_args()
 
-# Codificación (encoding) del sistema (terminal)
-cds = sys.stdin.encoding
-print u"Encoding:",cds
-arg = args.arg.decode(cds)
+arg = args.arg
 
 # Por último imprimimos el argumento "name" recibido
-print u"Argumentos recibidos:"
-print u"\tArgumento:",arg
+print(u"Argumentos recibidos:")
+print(u"\tArgumento:",arg)
 if args.min:
-	print u"\tminúsculas:",arg.lower()
+	print(u"\tminúsculas:",arg.lower())
 if args.may:
-	print u"\tMAYÚSCULAS:",arg.upper()
+	print(u"\tMAYÚSCULAS:",arg.upper())

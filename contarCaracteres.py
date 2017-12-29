@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """ EJEMPLOS DE USO DESDE LA TERMINAL
@@ -16,12 +16,6 @@ import re
 import collections
 import argparse
 
-def toUnicode(s):
-    if isinstance(s, str):
-        return s.decode('utf-8')
-    else:
-        return s
-
 def addslashes(s):
     ech = [
         ("\r","\\r"),
@@ -34,7 +28,7 @@ def addslashes(s):
     return s
  
 parser = argparse.ArgumentParser(description=u'Este programa intenta contar la frecuencia de las caracteres de un texto.\nEjemplo: python contarCaracteres.py -f texto1.txt -o aF -i')
-parser.add_argument("-f", "--file", type=argparse.FileType('r'), required=True, help=u"Define el archivo de texto a procesar (REQUERIDO).")
+parser.add_argument("-f", "--file", type=argparse.FileType('r', encoding='UTF-8'), required=True, help=u"Define el archivo de texto a procesar (REQUERIDO).")
 parser.add_argument("-o", "--ord", help=u"Ordenar contador: a:Alfabéticamente, f:Frecuencia (Mayúscula=Reversa).")
 parser.add_argument("-q", "--freq", help=u"Mostrar frecuencia de conteos.", action="store_true")
 parser.add_argument("-u", "--utf8", help=u"Codificar la salida como UTF-8.", action="store_true")
@@ -49,9 +43,9 @@ if args.utf8:
 def pru(s):
     global utf8
     if utf8:
-        print (u'>> '+s).encode('utf-8')
+        print((u'>> '+s).encode('utf-8'))
     else:
-        print (u'>> '+s)
+        print((u'>> '+s))
     
 # ORDER
 ordena = None
@@ -66,15 +60,14 @@ if args.freq:
     freq = True
 
 s=args.file.read()
-s = toUnicode(s)
 
-pattern = re.compile(ur'(.)', re.UNICODE | re.DOTALL)
+pattern = re.compile(r'(.)', re.UNICODE | re.DOTALL)
 
 chars = pattern.findall(s.lower())
 totchars = len(chars)
 
 contador = collections.Counter(chars).items()
-for c in xrange(len(ordena)):
+for c in range(len(ordena)):
     if ordena[c]=='a':
         contador = sorted(contador, key=lambda i: i[0]) # ordena alfabeticamente
     elif ordena[c]=='A':
@@ -87,8 +80,8 @@ for c in xrange(len(ordena)):
 pru(u"Total caracteres: "+str(totchars))
 pru(u"Total diferentes: "+str(len(contador)))
 if freq:
-    print "-------"
-    print "cnt\tfreq"
+    print("-------")
+    print("cnt\tfreq")
     cc = []
     for i,c in enumerate(contador):
         cc.append(c[1])
@@ -96,12 +89,12 @@ if freq:
     ccc = sorted(ccc, key=lambda i: i[0])
     ccc = sorted(ccc, key=lambda i: i[1], reverse=True) 
     for c in ccc:
-        print str(c[0])+"\t"+str(c[1])
+        print(str(c[0])+"\t"+str(c[1]))
 
-print "-------"
-print "id\tfreq\tpal\trepr"
+print("-------")
+print("id\tfreq\tpal\trepr")
 for i,c in enumerate(contador):
     if utf8:
-        print str(i+1)+"\t"+str(c[1])+"\t"+addslashes(c[0].encode('utf-8'))+"\t"+repr(c[0].encode('utf-8'))
+        print(str(i+1)+"\t"+str(c[1])+"\t"+addslashes(c[0].encode('utf-8'))+"\t"+repr(c[0].encode('utf-8')))
     else:
-        print str(i+1)+"\t"+str(c[1])+"\t"+addslashes(c[0])+"\t"+repr(c[0])
+        print(str(i+1)+"\t"+str(c[1])+"\t"+addslashes(c[0])+"\t"+repr(c[0]))

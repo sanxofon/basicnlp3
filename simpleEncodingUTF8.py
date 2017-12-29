@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -10,7 +10,7 @@
 """
 
 # La librería "sys" no permite acceder a información del sistema
-import sys
+# import sys
 
 """
 CADENAS DE TEXTO EN PYTHON
@@ -51,16 +51,11 @@ texto_normal = [
 	"ᘹᙀᙁᙂᙃᙄᙅᙆᙇᙈᙉ",
 	"\u1639\u1640\u1641\u1642\u1643\u1644\u1645\u1646\u1647\u1648\u1649",
 ]
-print ">> IMPRIMIMOS CADENAS DE TEXTO NORMAL DIRECTAMENTE"
+print(">> IMPRIMIMOS CADENAS DE TEXTO NORMAL DIRECTAMENTE")
 # Imprimimos estas cadenas a la consola directamente
 for t in texto_normal:
-	print t
+	print(t)
 
-print
-print ">> IMPRIMIMOS CADENAS DE TEXTO NORMAL DECODIFICADAS (UTF-8)"
-# Imprimimos estas cadenas a la consola decodificadas (utf-8)
-for t in texto_normal:
-	print t.decode("utf-8")
 
 
 
@@ -90,7 +85,7 @@ for t in texto_normal:
 
 		>>	import sys
 
-		>>	cadena_input = raw_input("Ingrese cadena de texto: ")
+		>>	cadena_input = input("Ingrese cadena de texto: ")
 		>>	cadena_unicode = cadena_input.decode(sys.stdin.encoding)
 
 		>>	cadena_argumento = sys.argv[1]
@@ -121,10 +116,10 @@ texto_unicode = [
 ]
 
 print
-print ">> IMPRIMIMOS CADENAS DE TEXTO UNICODE"
+print(">> IMPRIMIMOS CADENAS DE TEXTO UNICODE")
 # Imprimimos estas cadenas a la consola directamente
 for t in texto_unicode:
-	print t
+	print(t)
 
 
 """
@@ -133,10 +128,12 @@ for t in texto_unicode:
 		Estas cadenas se definen de la siguiente manera en el código:
 
 		>> cadena_raw = r"Cadena de texto raw"
-		>> cadena_raw_unicode = ur"Cadena de texto raw"
+		>> cadena_raw_unicode = r"Cadena de texto raw"
 
 		Nótese que hay una letra "r" minúscula antes de las primeras comillas.
-		Nótese que podemos usar el prefijo compuesto "ur" para definir una cadena "raw-unicode".
+		Nótese que podemos usar el prefijo compuesto "ur" (en python2) para definir una cadena "raw-unicode".
+		Sin embargo en Python3 todas las cadenas r'' son raw-unicode y no se acepta r''.
+		Pero en realidad lo que no es posible en python3 es definir una cadena literal RAW no NO SEA Unicode. 
 
 		Al escribir expresiones regulares en Python, se recomienda utilizar cadenas "crudas" o "raw" en lugar 
 		de cadenas Python normales. Las cadenas "raw" comienzan con un prefijo especial (r) y señalan a Python 
@@ -146,23 +143,23 @@ for t in texto_unicode:
 		de "\\n \\w" como sería lo correcto si omitimos el prefijo (r), lo que es mucho más fácil de leer.
 		Cuando escribamos una expresión regular en este curso siempre usaremos el prefijo compuesto (ur):
 
-		>> patron_regex = ur"Cadena de texto raw"
+		>> patron_regex = r"Cadena de texto raw"
 
 """
 
 texto_raw_unicode = [
-	ur"El veloz murciélago hindú comía feliz cardillo y kiwi.\nLa cigüena tocaba el saxofón detrás del palenque de paja.",
-	ur"El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro.",
-	ur"Exhíbanse politiquillos zafios,\ncon orejas kilométricas\n\ty unas de gavilán.",
-	ur"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir!",
-	ur"عـفقكلمنهوى",
-	ur"\u0639\u0640\u0641\u0642\u0643\u0644\u0645\u0646\u0647\u0648\u0649",
-	ur"ᘹᙀᙁᙂᙃᙄᙅᙆᙇᙈᙉ",
-	ur"\u1639\u1640\u1641\u1642\u1643\u1644\u1645\u1646\u1647\u1648\u1649",
+	r"El veloz murciélago hindú comía feliz cardillo y kiwi.\nLa cigüena tocaba el saxofón detrás del palenque de paja.",
+	r"El pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro.",
+	r"Exhíbanse politiquillos zafios,\ncon orejas kilométricas\n\ty unas de gavilán.",
+	r"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir!",
+	r"عـفقكلمنهوى",
+	r"\u0639\u0640\u0641\u0642\u0643\u0644\u0645\u0646\u0647\u0648\u0649",
+	r"ᘹᙀᙁᙂᙃᙄᙅᙆᙇᙈᙉ",
+	r"\u1639\u1640\u1641\u1642\u1643\u1644\u1645\u1646\u1647\u1648\u1649",
 ]
 
 print
-print ">> IMPRIMIMOS CADENAS DE TEXTO RAW-UNICODE"
+print(">> IMPRIMIMOS CADENAS DE TEXTO RAW-UNICODE")
 # Imprimimos estas cadenas a la consola directamente
 for t in texto_raw_unicode:
-	print t
+	print(t)

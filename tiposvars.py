@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -16,14 +16,14 @@ entero = int(cadena)
 
 # Comprobar si una variable es un entero
 if isinstance(cadena, int):
-	print cadena, "Es entero"
+	print(cadena, "Es entero")
 else:
-	print cadena, "No es entero"
+	print(cadena, "No es entero")
 
 if isinstance(entero, int):
-	print entero, "Es entero"
+	print(entero, "Es entero")
 else:
-	print entero, "No es entero"
+	print(entero, "No es entero")
 
 # Racionales: 0.5, 0,6534, etc
 flotante = 5.0982319237
@@ -34,42 +34,42 @@ flotante = float(cadena)
 
 # Comprobar si una variable es un entero
 if isinstance(cadena, float):
-	print cadena, "Es flotante"
+	print(cadena, "Es flotante")
 else:
-	print cadena, "No es flotante"
+	print(cadena, "No es flotante")
 
 if isinstance(entero, float):
-	print entero, "Es flotante"
+	print(entero, "Es flotante")
 else:
-	print entero, "No es flotante"
+	print(entero, "No es flotante")
 
 if isinstance(flotante, float):
-	print flotante, "Es flotante"
+	print(flotante, "Es flotante")
 else:
-	print flotante, "No es flotante"
+	print(flotante, "No es flotante")
 
 # Diferencias en operaciones
 entero = 5/7
 flotante = 5./7
 
 if isinstance(entero, float):
-	print entero, "Es flotante"
+	print(entero, "Es flotante")
 else:
-	print entero, "No es flotante"
+	print(entero, "No es flotante")
 
 if isinstance(flotante, float):
-	print flotante, "Es flotante"
+	print(flotante, "Es flotante")
 else:
-	print flotante, "No es flotante"
+	print(flotante, "No es flotante")
 
 
 # CADENAS DE TEXTO
 cadenaUTF8 = "Aquí va un texto" # Como el archivo está en UTF-8 esta cadena también
-print cadenaUTF8
+print(cadenaUTF8)
 cadena = cadenaUTF8.decode('utf-8') # Cadena ya está decodificada
-print cadena
+print(cadena)
 cadena = u"Aquí va un texto"
-print cadena
+print(cadena)
 
 # Convertir a cadena
 cadena = str(entero)
@@ -87,11 +87,11 @@ lista_simple = [
 ]
 
 # Imprime la lista en formato "soy muy conocedor"
-print lista_simple
+print(lista_simple)
 
 # Imprime la lista datos por dato en limpio, línea por línea
 for l in lista_simple:
-	print l
+	print(l)
 
 # Implrime la UNION de la lista con un "pegamento"
 lista_cadenas = []
@@ -100,7 +100,7 @@ for l in lista_simple:
 	lista_cadenas.append( str( l ) )
 
 # Imprimimos sim problemas!!
-print ", ".join(lista_cadenas)
+print(", ".join(lista_cadenas))
 
 
 # DICCIONARIO SIMPLES
@@ -112,13 +112,13 @@ diccionario = {
 }
 
 # Imprimir a la brava
-print diccionario
+print(diccionario)
 
 # Imprimir UNION de CLAVES (keys) << Siempre funciona !!
-print ", ".join( diccionario.keys() )
+print(", ".join( diccionario.keys() ))
 
 # Imprimir UNION de VALORES (values) << NO Siempre funciona !!
-# print ", ".join( diccionario.values() )
+# print(", ".join( diccionario.values() ))
 
 # OJO
 # diccionario.values() es una lista!!!
@@ -129,6 +129,6 @@ for l in diccionario.values():
 	# Convertimos a cadena y agragamos a lista_cadenas
 	lista_cadenas.append( str( l ) )
 
-print lista_cadenas
+print(lista_cadenas)
 
-print ", ".join(lista_cadenas)
+print(", ".join(lista_cadenas))

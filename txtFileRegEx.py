@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # FIX PARA WINDOWS CONSOLE, Usar: chcp 1252
@@ -53,7 +53,7 @@ with open("patrones.json","r") as jsonfile:
 parser = argparse.ArgumentParser(description=u"Este programa permite ejecutar una expresión regular sobre un archivo de texto.")
 parser.add_argument("-l", "--lis", help=u"Muestra un listado con los patrones RegEx definidos.", action="store_true")
 parser.add_argument("-v", "--ver", help=u"Verbose. Muestra más datos en la salida.", action="store_true")
-parser.add_argument("-f", "--fil", type=argparse.FileType('r'), help=u"Define el archivo de texto a procesar.")
+parser.add_argument("-f", "--fil", type=argparse.FileType('r', encoding='UTF-8'), help=u"Define el archivo de texto a procesar.")
 parser.add_argument("-i", "--ind", type=int, help=u"Define el índice de RegEx a ejecutar.")
 parser.add_argument("-e", "--emp", help=u"Elimina resultados vacíos.", action="store_true")
 parser.add_argument("-s", "--search", help=u"Cadena de búsqueda REGEX definidas por el usuario.")
@@ -76,7 +76,7 @@ else:
 # Se recibió solucitud de listado de patrones RegEx
 if args.lis:
 	# Imprime una lista con los patrones definidos
-	print "La lista de patrones RegEx definidos es:\n\t"+"\n\t".join([str(i+1)+". "+p['d'] for i,p in enumerate(patrones)])
+	print("La lista de patrones RegEx definidos es:\n\t"+"\n\t".join([str(i+1)+". "+p['d'] for i,p in enumerate(patrones)]))
 
 # Se recibió archivo e índice de patrón RegEx
 elif args.fil:
@@ -85,8 +85,8 @@ elif args.fil:
 	cadena = args.fil.read().decode('utf-8')
 
 	# Elimina retorno de carro: \r (windows files)
-	reca = re.compile(ur'\r', re.UNICODE)
-	cadena = reca.sub(ur'',cadena)
+	reca = re.compile(r'\r', re.UNICODE)
+	cadena = reca.sub(r'',cadena)
 	
 
 	# Define patron de busqueda y  reemplazo definido por el usuario
@@ -120,7 +120,7 @@ elif args.fil:
 
 			if args.ver:
 				# Imprimimos la descripción del patrón agregado
-				print u"\tPatrón agregado:",patrones[indice]['d']
+				print(u"\tPatrón agregado:",patrones[indice]['d'])
 
 		# Caso contrario no guardamos nada pero agregamos temporalmente a la lista de patrones (en memoria)
 		else:
@@ -141,13 +141,13 @@ elif args.fil:
 
 	# Imprimimos la cadena definida tal cual
 	# if args.ver:
-	# 	print "\n",u"Cadena:",cadena
+	# 	print("\n",u"Cadena:",cadena)
 
 	if args.ver:
 		# Imprimimos la descripción
-		print u"\tDescripción:",patrones[indice]['d']
+		print(u"\tDescripción:",patrones[indice]['d'])
 		# Imprimimos el patrón RegEx
-		print u"\tPatrón:",patrones[indice]['s'],"\n"
+		print(u"\tPatrón:",patrones[indice]['s'],"\n")
 
 	# Caso de que queremos buscar/reemplazar
 	if arre is not None:
@@ -159,7 +159,7 @@ elif args.fil:
 
 		if args.ver:
 			# Imprimimos la descripción reemplazo
-			print u"\tPatrón de reemplazo:",arre,"\n"
+			print(u"\tPatrón de reemplazo:",arre,"\n")
 
 		# Este loop hace el reemplazo recursivo
 		cadenaMem = ""
@@ -170,7 +170,7 @@ elif args.fil:
 			cadenaMem = cadena
 
 		# Imprimimos cadena reemplazada y acabamos
-		print cadena
+		print(cadena)
 
 	# Caso de que queremos sólo buscar
 	else:
@@ -195,11 +195,11 @@ elif args.fil:
 					# Además uso un "join" para unir la lista de cadenas que trae el tuple m
 					mm = "\t".join([re.sub(r'\n',r'\\n',re.sub(r'\t',r'\\t',re.sub(r' ',r'_',x))) for x in m])
 					if args.ver:
-						print ii,"\t", mm
+						print(ii,"\t", mm)
 					else:
-						print mm
+						print(mm)
 					# La vesión simplificada sería
-					# print ii,"\t", "\t".join(m)
+					# print(ii,"\t", "\t".join(m))
 
 				# En caso contrario es una cadena (un sólo grupo) así que simplemente la imprimimos
 				else:
@@ -207,15 +207,15 @@ elif args.fil:
 					# El mismo re.sub de arriba...
 					mm = re.sub(r'\n',r'\\n',re.sub(r'\t',r'\\t',re.sub(r' ',r'_',m)))
 					if args.ver:
-						print ii,"\t", mm
+						print(ii,"\t", mm)
 					else:
-						print mm
+						print(mm)
 					# La vesión simplificada sería
-					# print ii,"\t", m
+					# print(ii,"\t", m)
 
 		# Caso contrario avisamos que no hubo coincidencias
 		elif args.ver:
-			print "\t",u"No hubo coincidencias"
+			print("\t",u"No hubo coincidencias")
 
 # Salida cuando no se recibieron argumentos mínimos
 else:

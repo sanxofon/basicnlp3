@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 ######################################################
 # ESTE PEDAZO CONTROLA LA SALIDA UTF-8 Y LA AYUDA
@@ -9,8 +9,6 @@ args = parser.parse_args()
 import codecs,locale,sys
 if args.utf8:
     sys.stdout = codecs.getwriter("utf8")(sys.stdout)
-else:
-    sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 ######################################################
 """
 En este script se muestra cómo usar el software Stanford CoreNLP
@@ -65,10 +63,9 @@ Hemos terminado, así que podemos ejecutar este script desde la consola:
 """
 
 cadena = u"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir la Universidad Nacional!"
-cadena = cadena.encode("utf-8")
 
-print u"Cadena:"
-print "\t",cadena.decode('utf-8')
+print(u"Cadena:")
+print("\t",cadena)
 from stanfordcorenlp import StanfordCoreNLP
 
 # Este comando inicia un servidor similar al que usamos probando la instalación y podemos usar "nlp" como
@@ -81,21 +78,21 @@ nlp = StanfordCoreNLP(r'../corenlp/', lang='es', memory='2g')
 print
 
 # 1- Tokenización
-print 'TOK:', nlp.word_tokenize(cadena)
+print('TOK:', nlp.word_tokenize(cadena))
 print
 
 # 2- Etiquetado POS / Part Of Speech Tagging
-print 'POS:', nlp.pos_tag(cadena)
+print('POS:', nlp.pos_tag(cadena))
 print
 
 # 3- Entidades nombradas / Named Entities
-print 'NER:', nlp.ner(cadena)
+print('NER:', nlp.ner(cadena))
 print
 
 # 4- Análisis de circunscripciones / Constituency Parsing
-print 'COPAR:'
-print nlp.parse(cadena)
+print('COPAR:')
+print(nlp.parse(cadena))
 print
 
 # 5- Análisis de dependencias / Dependency Parsing (NO FUNCIONA EN ESPAÑOL!!)
-# print 'DEPAR:', nlp.dependency_parse(cadena)
+# print('DEPAR:', nlp.dependency_parse(cadena))

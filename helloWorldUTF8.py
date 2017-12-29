@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -8,14 +8,9 @@
 	Ejemplos de ejecución:
 	>> python helloWorldUTF8.py
 """
-
-# Importamos una librería para poder usar sus funcionalidades
-# La librería "sys" no permite acceder a información del sistema
-import sys
-
 # la función "print" se encarga de codificar apropiadamente la salida
 # Al agregar la letra 'u' (antes de las comillas) definimos el texto como UNICODE
-print u"Hola, Anónimo"
+print(u"Hola, Anónimo")
 
 # Definimos una variable desde el código
 # Podemos usar cualquier palabra (no usada anteriormente)
@@ -25,14 +20,13 @@ print u"Hola, Anónimo"
 pregunta = u"¿Cómo te llamas?\n>> "
 
 # Ahora pedimos al usuario información en la terminal, guardamos la respuesta en una variable
-# Note que "codificamos" el texto de la pregunta a la codificación actual de la terminal
-# Codificación actual de la terminal: "sys.stdin.encoding"
-nombre = raw_input(pregunta.encode(sys.stdin.encoding))
+# En Python3 TODAS las cadenas son unicode, no hay decode
+nombre = input(pregunta)
 
 # Ahora "decodificamos" el nombre de la codificación actual de la terminal a UNICODE
 # Codificación actual de la terminal: "sys.stdin.encoding"
-nombre = nombre.decode(sys.stdin.encoding)
+nombre = nombre
 
 # Por último imprimimos un saludo que incluye el nommbre recibido del usuario
 # Usamos el signo de suma "+" para unir dos o más cadenas de texto, sean literales o variables
-print u"¡Hola, "+nombre+"!"
+print(u"¡Hola, "+nombre+"!")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import os
 import logging,re
@@ -28,7 +28,15 @@ class Analyzer(object):
 
     def run(self, input, *args, **kwargs):
         cmd = self._build_cmd(*args, **kwargs)
-        logger.debug(cmd)
+        # logger.debug(cmd)
+        # print(cmd)
+        for i in range(len(cmd)):
+            try:
+                cmd[i] = bytes(cmd[i])
+            except Exception as e:
+                pass
+        # # cmd = " ".join(cmd)
+        print(cmd)
         proc = Popen(cmd, stdin=PIPE, stdout=PIPE)
         outs, errs = proc.communicate(input)
         if errs is None:
@@ -61,5 +69,5 @@ class Analyzer(object):
             param, value = self._build_param(key, val)
             cmd += [param, value]
 
-        cmd += ['--output', 'json']
+        cmd += ['--output', 'xml']
         return cmd

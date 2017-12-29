@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -84,7 +84,7 @@ neighbors = np.arange(1, 15)
 train_accuracy = np.empty(len(neighbors))
 test_accuracy = np.empty(len(neighbors))
 
-print "Test de diferentes valores de n_neighbors:"
+print("Test de diferentes valores de n_neighbors:")
 kmem = 0
 # Bucle sobre diferentes valores de k
 for i, k in enumerate(neighbors):
@@ -105,7 +105,7 @@ for i, k in enumerate(neighbors):
 
     c = a-abs(a-b)
     if k>1 and kmem<c:
-        print "\t",k,a-abs(a-b)
+        print("\t",k,a-abs(a-b))
     kmem = c
 
 

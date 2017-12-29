@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 """
@@ -22,7 +22,7 @@ import argparse
 
 # Inicializamos el "parser" de argumentos con la descripción general
 parser = argparse.ArgumentParser(description=u"Este programa cuenta la frecuencia de una lista de 2gramas.")
-parser.add_argument("-f", "--fil", type=argparse.FileType('r'), required=True, help=u"Define el archivo de 2gramas a procesar.")
+parser.add_argument("-f", "--fil", type=argparse.FileType('r', encoding='UTF-8'), required=True, help=u"Define el archivo de 2gramas a procesar.")
 parser.add_argument("-u", "--utf", help=u"Forzar salida UTF-8.", action="store_true")
 args = parser.parse_args()
 
@@ -38,8 +38,8 @@ else:
 cadena = args.fil.read().decode('utf-8')
 
 # Elimina retorno de carro: \r (windows files)
-reca = re.compile(ur'\r', re.UNICODE)
-cadena = reca.sub(ur'',cadena)
+reca = re.compile(r'\r', re.UNICODE)
+cadena = reca.sub(r'',cadena)
 
 # Separa la cadena por saltos de linea
 lista = cadena.split("\n")
@@ -50,7 +50,7 @@ cl = len(lista)
 grams = {}
 for i,l in enumerate(lista):
 	while True:
-		l = re.sub(ur'\t{3}','',l)
+		l = re.sub(r'\t{3}','',l)
 		if l==ml:
 			break
 		ml = l

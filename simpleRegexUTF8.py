@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """
@@ -17,7 +17,7 @@ cadena = u"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exh
 
 # Siempre que definamos un patrón REGEX en código lo haremos con el prefijo (ur)
 # Este patrón busca dos palabras separadas por solamente por un espacio
-patron = ur"([\w]+) ([\w]+)"
+patron = r"([\w]+) ([\w]+)"
 
 
 
@@ -43,14 +43,14 @@ Buscar coincidencias de una cadena
 
 """
 
-print u">> RE.SEARCH"
+print(u">> RE.SEARCH")
 # Buscamos el "patron" en la "cadena"
 match = re.search(patron, cadena)
 if match:
-	print u"Coincidencia en el índice %s, %s" % (match.start(), match.end())
-	print u"Grupos:"
+	print(u"Coincidencia en el índice %s, %s" % (match.start(), match.end()))
+	print(u"Grupos:")
 	for g in match.groups():
-		print "\t",g
+		print("\t",g)
 
 
 """
@@ -67,18 +67,18 @@ Capturar todas las coincidencias de una cadena
 """
 
 print
-print u">> RE.FINDALL"
+print(u">> RE.FINDALL")
 # Buscamos TODAS las coincdencias del "patron" en la "cadena"
 match = re.findall(patron, cadena)
-print u"Coincidencias:"
+print(u"Coincidencias:")
 for m in match:
-	print "\t", " ".join(m)
+	print("\t", " ".join(m))
 
 # Buscamos TODAS las coincdencias del "patron" en la "cadena" CON LA BANDERA UNICODE
 match = re.findall(patron, cadena, re.UNICODE)
-print u"Coincidencias Unicode:"
+print(u"Coincidencias Unicode:")
 for m in match:
-	print "\t", " ".join(m)
+	print("\t", " ".join(m))
 
 
 """
@@ -94,9 +94,9 @@ Encontrar y reemplazar cadenas
 """
 
 print
-print u">> RE.SUB"
+print(u">> RE.SUB")
 # Definimos un patron de reemplazo que invierte el orden de las palabras
-patron_reemplazo = ur"\2 \1"
+patron_reemplazo = r"\2 \1"
 
 # Reemplazamos "patron" por "patron_reemplazo" en la "cadena" y guardamos el resultado en "cadena_resultado"
 cadena_resultado = re.sub(patron, patron_reemplazo, cadena)
@@ -105,13 +105,13 @@ cadena_resultado = re.sub(patron, patron_reemplazo, cadena)
 cadena_resultado_unicode = re.sub(patron, patron_reemplazo, cadena, 0, re.UNICODE)
 
 #Imprimimos "cadena" original
-print u"Original:", "\t", cadena
+print(u"Original:", "\t", cadena)
 
 #Imprimimos "cadena_resultado"
-print u"Resultado:", "\t", cadena_resultado
+print(u"Resultado:", "\t", cadena_resultado)
 
 #Imprimimos "cadena_resultado"
-print u"Unicode:", "\t",cadena_resultado_unicode
+print(u"Unicode:", "\t",cadena_resultado_unicode)
 
 
 """
@@ -128,21 +128,21 @@ Compilar patrones de búsqueda
 """
 
 print
-print u">> RE.COMPILE"
+print(u">> RE.COMPILE")
 # Compilamos el patrón de búsqueda
 patron_compilado = re.compile(patron, re.UNICODE)
 
-print "search:"
+print("search:")
 # Usamos el objeto "patron_compilado" para buscar (search)
 match = patron_compilado.search(cadena)
 if match:
-    print "\t", match.start(), match.end()
+    print("\t", match.start(), match.end())
 
-print "findall:"
+print("findall:")
 # Usamos el objeto "patron_compilado" para encontrar todos las coincidencias (findall)
 for m in patron_compilado.findall(cadena):
-    print "\t", " ".join(m)
+    print("\t", " ".join(m))
     
-print "sub:"
+print("sub:")
 # Usamos el objeto "patron_compilado" para reemplazar "patron" por "patron_reemplazo" en "cadena" (sub)
-print "\t", patron_compilado.sub(patron_reemplazo, cadena)
+print("\t", patron_compilado.sub(patron_reemplazo, cadena))

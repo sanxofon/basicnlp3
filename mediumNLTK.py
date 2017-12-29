@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 ######################################################
@@ -10,8 +10,6 @@ args = parser.parse_args()
 import codecs,locale,sys
 if args.utf8:
     sys.stdout = codecs.getwriter("utf8")(sys.stdout)
-else:
-    sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 ######################################################
 # Función de ayuda de impresión (no le hagan caso)
 def addslashes(s):
@@ -44,35 +42,35 @@ import nltk
 # Siempre que definamos una cadena en código lo haremos con el prefijo (u)
 cadena = u"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir!\nEl veloz murciélago hindú comía feliz cardillo y kiwi.\nLa cigüena tocaba el saxofón detrás del palenque de paja.\nEl pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro.\nExhíbanse politiquillos zafios,\ncon orejas kilométricas\n\ty unas de gavilán."
 
-print u"Cadena:"
-print "\t",cadena
+print(u"Cadena:")
+print("\t",cadena)
 
 # Ejemplo normal de tokenizador por palabras (las palabras se capturan con los signos de puntuación adyacentes)
 from nltk.tokenize import TreebankWordTokenizer
 tokenizer = TreebankWordTokenizer()
 tokens = tokenizer.tokenize(cadena)
-# print u"\nPalabras:"
-# print "\t","\n\t".join([addslashes(t) for t in tokens])
+# print(u"\nPalabras:")
+# print("\t","\n\t".join([addslashes(t) for t in tokens]))
 
 # Tokenizador que separa las palabras y luego los signos de puntuación
 from nltk.tokenize import WordPunctTokenizer
 word_punct_tokenizer = WordPunctTokenizer()
 palabras = word_punct_tokenizer.tokenize(cadena)
-# print u"\nPalabras/Puntuación:"
-# print "\t","\n\t".join([addslashes(t) for t in palabras])
+# print(u"\nPalabras/Puntuación:")
+# print("\t","\n\t".join([addslashes(t) for t in palabras]))
 
 # Versión en español del tokenizador por frases
 import nltk.data
 spanish_tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
 frases = spanish_tokenizer.tokenize(cadena)
-# print u"\nFrases:"
-# print "\t","\n\t".join([addslashes(t) for t in frases])
+# print(u"\nFrases:")
+# print("\t","\n\t".join([addslashes(t) for t in frases]))
 
 # POS-Tagging (en ingés, no funciona en español)
 # tagged = nltk.pos_tag(tokens)
-# print "Tagged:"
+# print("Tagged:")
 # for t in tagged:
-#     print "\t", "\t".join(t)
+#     print("\t", "\t".join(t))
 
 # POS-Tagging sencillo (en español)
 # Para poder taggear en español necesitamos primero entrenar 
@@ -104,8 +102,8 @@ if crear_taggers:
 
     # Evaluamos en los datos de testeo, el 10% restante
     evaluacion = bi_tag.evaluate(cess_sents[train+1:])
-    print u"\nEvaluación:"
-    print evaluacion
+    print(u"\nEvaluación:")
+    print(evaluacion)
 else:
     # Si ya están generados los taggers podemos simplemente abrirlos
     with open('test/cess_unigram.tagger.pkl', 'rb') as input:
@@ -121,9 +119,9 @@ tagged1 = uni_tag.tag(palabras)
 tagged2 = bi_tag.tag(palabras)
 
 # Imprimimos
-print u"\nTagged Unigram:"
+print(u"\nTagged Unigram:")
 for t in tagged1:
-    print "\t",t[1], t[0]
-print u"\nTagged Bigram:"
+    print("\t",t[1], t[0])
+print(u"\nTagged Bigram:")
 for t in tagged2:
-    print "\t",t[1], t[0]
+    print("\t",t[1], t[0])

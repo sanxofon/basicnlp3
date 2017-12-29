@@ -1,4 +1,4 @@
-#!/usr/bin/env python -W ignore::DeprecationWarning
+#!/usr/bin/python3 -W ignore::DeprecationWarning
 # -*- coding: utf-8 -*-
 
 ######################################################
@@ -10,8 +10,6 @@ args = parser.parse_args()
 import codecs,locale,sys
 if args.utf8:
     sys.stdout = codecs.getwriter("utf8")(sys.stdout)
-else:
-    sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
 ######################################################
 # Función de ayuda de impresión (no le hagan caso)
 def addslashes(s):
@@ -96,15 +94,15 @@ from nltk.tokenize import WordPunctTokenizer
 
 # Definimos una cadena de texto (con varias frases) para probar
 cadena = u"—¡Joven «emponzoñado» con el whisky, qué fin… te aguarda exhibir!\nEl veloz murciélago hindú comía feliz cardillo y kiwi.\nLa cigüena tocaba el saxofón detrás del palenque de paja.\nEl pingüino Wenceslao hizo kilómetros bajo exhaustiva lluvia y frío, añoraba a su querido cachorro.\nExhíbanse politiquillos zafios,\ncon orejas kilométricas\n\ty unas de gavilán."
-print u"Cadena:"
-print "\t",addslashes(cadena)
+print(u"Cadena:")
+print("\t",addslashes(cadena))
 
 # Versión en español del tokenizador por frases
 spanish_frase_tokenizer = nltk.data.load("tokenizers/punkt/spanish.pickle")
 frases = spanish_frase_tokenizer.tokenize(cadena)
-print u"Frases:"
+print(u"Frases:")
 for f in frases:
-    print "\t",addslashes(f)
+    print("\t",addslashes(f))
 
 # Prepara el Tokenizador que separa las palabras y luego los signos de puntuación
 palabra_tokenizer = WordPunctTokenizer()
@@ -120,4 +118,4 @@ for frase in frases:
     # Taggea la frase tokenizada
     tagged_words = spanish_postagger.tag(palabras)
     for (word, tag) in tagged_words:
-        print word,tag
+        print(word,tag)

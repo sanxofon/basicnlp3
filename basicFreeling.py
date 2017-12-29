@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
 Tal vez el mejor software de NLP para el idioma español actualmente es FREELING. Está escrito en 
@@ -48,13 +48,7 @@ VERSION WINDOWS
 	$ python basicFreeling.py -f test/texto2.txt > test/texto2_freeling.json
 
 
-
 """
-# MAGICA CONFIGURACIÓN DE CODECS SALIDA ----------------------
-# FIX PARA WINDOWS CONSOLE, Usar: chcp 1252
-import codecs,locale,sys
-sys.stdout = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
-#--------------------------------------------------------------------------------
 import os
 # Importamos el wrapper de Freeling
 from freelingwrapper import Analyzer
@@ -64,7 +58,7 @@ import argparse
 parser = argparse.ArgumentParser(description=u'FREELING Básico en español')
 parser.add_argument("-c", "--cfg", help=u"Definir el archivo de configuración (ruta absoluta)")
 parser.add_argument("-l", "--lang", help=u"Idioma en qe se realiza el análisis (debe coincidir con lo definido en la configuración)")
-parser.add_argument("-f", "--file",type=argparse.FileType('r'), help=u"Definir el archivo de texto a analizar (en UTF-8)")
+parser.add_argument("-f", "--file",type=argparse.FileType('r', encoding='UTF-8'), help=u"Definir el archivo de texto a analizar (en UTF-8)")
 args = parser.parse_args()
 
 # Argumentos recibidos o defaults si no se reciben
@@ -74,6 +68,7 @@ else:
 	# Todos las configuraciones, seleccion de idioma y formato de salida se hacen en el archivo "es.cfg"
 	if os.name == 'nt':
 		config_file = 'C:\\s\\freeling\\data\\config\\es.cfg'
+		# config_file = '/s/freeling/data/config/es.cfg'
 	else:
 		config_file = '/usr/share/freeling/config/es.cfg'
 if args.lang:
@@ -99,4 +94,4 @@ analyzer = Analyzer(config=config_file, lang=lang)
 output = analyzer.run(text)
 
 # Imprimimos la salida
-print(output.decode('utf-8'))
+print(output)
