@@ -58,6 +58,7 @@ import argparse
 parser = argparse.ArgumentParser(description=u'FREELING Básico en español')
 parser.add_argument("-c", "--cfg", help=u"Definir el archivo de configuración (ruta absoluta)")
 parser.add_argument("-l", "--lang", help=u"Idioma en qe se realiza el análisis (debe coincidir con lo definido en la configuración)")
+parser.add_argument("-o", "--outf", help=u"Formato de salida: json, xml, freeling")
 parser.add_argument("-f", "--file",type=argparse.FileType('r', encoding='UTF-8'), help=u"Definir el archivo de texto a analizar (en UTF-8)")
 args = parser.parse_args()
 
@@ -75,6 +76,10 @@ if args.lang:
 	lang = args.lang;
 else:
 	lang = 'es'
+if args.outf:
+	outf = args.outf;
+else:
+	outf = 'freeling'
 if args.file:
 	text = args.file.read()
 else:
@@ -90,8 +95,8 @@ El aumento de la canasta de consumo que registra el gobierno de la Ciudad supera
 """
 
 # Ejecutamos en wrapper y freeling en el fondo
-analyzer = Analyzer(config=config_file, lang=lang)
-output = analyzer.run(text)
+analyzer = Analyzer(config=config_file, lang=lang, outf=outf)
+salida = analyzer.run(text)
 
 # Imprimimos la salida
-print(output)
+print(salida)

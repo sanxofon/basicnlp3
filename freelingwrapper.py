@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import logging,re
-from subprocess import check_output, CalledProcessError, Popen, PIPE
+from subprocess import check_output, CalledProcessError, Popen,PIPE
 
 binary = None
 
@@ -23,6 +23,7 @@ class Analyzer(object):
     def __init__(self, *args, **kwargs):
         self.config = kwargs.get('config', 'analyzer.cfg')
         self.lang = kwargs.get('lang', 'en')
+        self.outf = kwargs.get('outf', 'txt')
         self.timeout = kwargs.get('timeout', 30)
         self.binary = find_binary()
 
@@ -30,14 +31,7 @@ class Analyzer(object):
         cmd = self._build_cmd(*args, **kwargs)
         # logger.debug(cmd)
         # print(cmd)
-        for i in range(len(cmd)):
-            try:
-                cmd[i] = bytes(cmd[i])
-            except Exception as e:
-                pass
-        # # cmd = " ".join(cmd)
-        print(cmd)
-        proc = Popen(cmd, stdin=PIPE, stdout=PIPE)
+        proc = Popen(cmd, stdin=PIPE, stdout=PIPE, universal_newlines=True)
         outs, errs = proc.communicate(input)
         if errs is None:
             outs = re.sub(r'\n', '', outs) # Clean br
@@ -58,7 +52,7 @@ class Analyzer(object):
         return '--{}'.format(a)
 
     def _build_cmd(self, *flags, **kwargs):
-        cmd = [self.binary, '-f', self.config]
+        cmd = [self.binary.decode('utf-8'), '-f', self.config]
 
         for f in flags:
             flag = self._build_flag(f)
@@ -69,5 +63,5 @@ class Analyzer(object):
             param, value = self._build_param(key, val)
             cmd += [param, value]
 
-        cmd += ['--output', 'xml']
+        cmd += ['--output', self.outf]
         return cmd

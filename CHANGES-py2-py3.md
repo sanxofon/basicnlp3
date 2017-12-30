@@ -19,3 +19,9 @@ R:argparse.FileType('r', encoding='UTF-8')
 Resolver: xrange( => range(
 S:xrange(
 R:range(
+
+
+CREAR ENTORNO 2.7
+conda create -n py2 python=2.7
+activate py2
+deactivate py2
